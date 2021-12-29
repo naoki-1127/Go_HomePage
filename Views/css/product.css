@@ -1,0 +1,18 @@
+.alert-color {
+    border-color: #ff0000;
+}
+table {
+    border-collapse: collapse;
+}
+thead, tbody {
+    display: block;
+}
+tbody {
+    height: 250px;
+    width: 592px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+h1 {
+    color: #ff0000;
+}
