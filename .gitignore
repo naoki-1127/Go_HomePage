@@ -1,4 +1,4 @@
 #logはいらない
-.log
+*.log
 #画像はいらない
 Views/images    
