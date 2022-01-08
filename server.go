@@ -28,11 +28,12 @@ func serve() {
 	router.Static("/Views", "./Views")
 
 	router.StaticFS("/goapp", http.Dir("./views/static"))
+	router.POST("/goapp/registration.html", Controllers.CreateUserAction)
 
-	v1 := router.Group("/api/v1")
+	/* v1 := router.Group("/api/v1")
 	{
 		v1.POST("/register", Controllers.CreateUserAction)
-	}
+	} */
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal("Server Run Failed.: ", err)
