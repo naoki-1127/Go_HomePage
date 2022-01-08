@@ -1,7 +1,7 @@
 package Controller
 
 import (
-	db "Go_app/Models/db"
+	db "Go_app/Config"
 	entity "Go_app/Models/entity"
 	"log"
 	"net/http"

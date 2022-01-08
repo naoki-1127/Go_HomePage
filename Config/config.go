@@ -4,8 +4,11 @@ import (
 	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/ini.v1"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 type ConfigList struct {
@@ -34,4 +37,24 @@ func PasswordEncrypt(password string) (string, error) {
 // CompareHashAndPassword hashと非hashパスワード比較
 func CompareHashAndPassword(hash, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+}
+
+func GormConnect() *gorm.DB {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("envエラー")
+	}
+
+	env := os.Getenv("ENV")
+	DB := os.Getenv("DB")
+	DBUser := os.Getenv("DB_USER")
+	DBPass := os.Getenv("DB_PASS")
+
+	dsn := DBUser + ":" + DBPass + "@tcp(localhost:3306)/" + DB + "?charset=utf8&parseTime=True&loc=" + env
+	log.Println(dsn)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Panicln("failed to connect database")
+	}
+	return db
 }
