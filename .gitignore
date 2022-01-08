@@ -1,4 +1,6 @@
 #logはいらない
 *.log
 #画像はいらない
-Views/images    
+Views/images
+#envはいらない
+*.env
