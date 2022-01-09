@@ -51,7 +51,6 @@ func GormConnect() *gorm.DB {
 	DBPass := os.Getenv("DB_PASS")
 
 	dsn := DBUser + ":" + DBPass + "@tcp(localhost:3306)/" + DB + "?charset=utf8&parseTime=True&loc=" + env
-	log.Println(dsn)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Panicln("failed to connect database")
