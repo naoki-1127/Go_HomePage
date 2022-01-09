@@ -12,6 +12,6 @@ func TopPageDisplayAction(c *gin.Context) {
 }
 
 func RegistrationPageDisplayAction(c *gin.Context) {
-	log.Println("Start_TopPageDisplayAction_Methods")
+	log.Println("Start_RegistrationPageDisplayAction_Methods")
 	c.HTML(200, "registration.html", gin.H{})
 }
