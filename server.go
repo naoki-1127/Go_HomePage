@@ -5,7 +5,6 @@ import (
 	Controllers "Go_app/Controllers"
 	Utils "Go_app/Utils"
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,14 +19,11 @@ func serve() {
 	log.Println("サーバーを起動しました")
 	router := gin.Default()
 
-	/* 	router.LoadHTMLGlob("Views/static/*.html")
-
-	router.GET("/goapp", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "index.html", gin.H{})
-	}) */
+	router.LoadHTMLGlob("Views/static/*.html")
 	router.Static("/Views", "./Views")
 
-	router.StaticFS("/goapp", http.Dir("./views/static"))
+	router.GET("/goapp", Controllers.TopPageDisplayAction)
+	router.GET("/goapp/registration.html", Controllers.RegistrationPageDisplayAction)
 	router.POST("/goapp/registration.html", Controllers.CreateUserAction)
 
 	/* v1 := router.Group("/api/v1")

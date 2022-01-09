@@ -48,25 +48,14 @@
                         <div class="card">
                             <div class="card-header">会員登録</div>
                             <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="col-form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="col-form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            会員登録
-                                        </button>
-                                    </div>
-                                </div>
+                                <p class="card-text">お名前：<input type="text" name="name" required="required"></p>
+                                <p class="card-text">メールアドレス：<input type="email" name="email" required="required"></p>
+                                <p class="card-text">パスワード：<input type="password" name="password" required="required"></p>
+                                <p><input class="btn btn-primary" type="submit" value="送信する"></p>
+                                <p><input class="btn btn-secondary" type="reset" value="取消する"></p>
                             </div>
                         </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -89,3 +78,11 @@
         </div>
     </footer>
 </html>
+<style>
+    .card-header{
+        color: black;
+    }
+    .card-text{
+        color: black;
+    }
+</style>
