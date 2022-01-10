@@ -3,6 +3,7 @@ package main
 import (
 	Config "Go_app/Config"
 	Controllers "Go_app/Controllers"
+	db "Go_app/Models/db"
 	Utils "Go_app/Utils"
 	"log"
 
@@ -12,6 +13,7 @@ import (
 func main() {
 	Utils.LoggingSetting(Config.Config.LogFile)
 	log.Println("Sample")
+	db.Open()
 	serve()
 }
 
