@@ -17,16 +17,12 @@ type User struct {
 }
 
 func createUser(name string, email string, password string) error {
+	log.Println("Start_CreateUser_Methods")
 	db := db.GormConnect()
-	if err := db.Where("email = ?", email).First(&entity.User{}).Error; err != nil {
-		// 検索でレコードが見つからなかった場合
-		if err := db.Create(&entity.User{Name: name, Email: email, Password: password, Created_at: time.Now(), Updated_at: time.Now()}).Error; err != nil {
-			log.Println("ユーザの登録ができませんでした")
-			log.Println(err)
-			return err
-		}
-	} else {
-		log.Println("ユーザの登録が既にあります")
+	// 検索でレコードが見つからなかった場合
+	if err := db.Create(&entity.User{Name: name, Email: email, Password: password, Created_at: time.Now(), Updated_at: time.Now()}).Error; err != nil {
+		log.Println("ユーザの登録ができませんでした")
+		log.Println(err)
 		return err
 	}
 	return nil
@@ -53,21 +49,29 @@ func CreateUserAction(c *gin.Context) {
 			Result: "",
 		}
 
-		// 登録ユーザーが重複していた場合にはじく処理
-		if err := createUser(name, email, password); err != nil {
-			log.Println("ユーザ重複")
-			u.Name = name
-			u.Email = email
-			u.Result = "登録失敗"
-			c.JSON(200, u)
+		db := db.GormConnect()
+		if err := db.Where("email = ?", email).First(&entity.User{}).Error; err != nil {
+			// 検索でレコードが見つからなかった場合
+			if err := createUser(name, email, password); err != nil {
+				u.Name = name
+				u.Email = email
+				u.Result = "登録失敗"
+				c.JSON(200, u)
+			} else {
+				u.Name = name
+				u.Email = email
+				u.Result = "登録成功"
+				c.JSON(200, u)
+			}
 		} else {
+			log.Println("ユーザの登録が既にあります")
 			u.Name = name
 			u.Email = email
-			u.Result = "登録成功"
+			u.Result = "ユーザの登録が既にあります"
 			c.JSON(200, u)
 		}
 
-		c.Redirect(302, "/goapp/registration.html")
+		c.Get("/goapp/registration")
 	}
 	log.Println("リダイレクトするで")
 }

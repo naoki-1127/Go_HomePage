@@ -24,7 +24,7 @@ func serve() {
 
 	router.GET("/goapp", Controllers.TopPageDisplayAction)
 	router.GET("/goapp/registration", Controllers.RegistrationPageDisplayAction)
-	router.POST("/goapp/registration.html", Controllers.CreateUserAction)
+	router.POST("/goapp/registration", Controllers.CreateUserAction)
 
 	/* v1 := router.Group("/api/v1")
 	{
